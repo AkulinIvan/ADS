@@ -85,17 +85,17 @@
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Заявки</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Новая заявка</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "applications:index" %}">Заявки</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "applications:application" %}">Новая заявка</a></li>
                         <li><a class="dropdown-item text-white" href="goods/catalog.html">Звонки</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <!-- Контент -->
-        <div class="container">
-            <div class="row mt-1">
-                <div class="col-lg-2">
+        
+            
+                
                     <!-- Пустой блок на Ваше усмотрение -->
                 </div>
                 <div class="col-lg-10">
