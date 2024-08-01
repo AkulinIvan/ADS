@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{%load static %}
+
+{% block content %}
+
+
+<div class="col-lg-600 col-md-60 p-40">
+<div class="card border-primary rounded custom-shadow">
+<form method="post">
+    <h2>Создание заявки</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form></div></div>
+{% endblock %}
+
+{% block footer %}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Аварийно-диспечерская служба 2024</p>
+    </div>
+</footer>
+{% endblock  %}
