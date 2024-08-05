@@ -15,6 +15,9 @@ def login(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, f"{username}, Вы вошли в аккаунт")
+                if request.GET.get('next', None):
+                    return HttpResponseRedirect(request.POST.get('next'))
+                
                 return HttpResponseRedirect(reverse('main:index'))
     else:
         form  = UserLoginForm()
@@ -59,6 +62,7 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
+@login_required
 def logout(request):
     messages.warning(request, f"{request.user.username}, Вы вышли из аккаунта")
     auth.logout(request)
