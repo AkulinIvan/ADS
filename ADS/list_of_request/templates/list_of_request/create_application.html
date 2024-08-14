@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{%load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+    <link rel="stylesheet" href="{% static "deps/css/form.css" %}">
+{% endblock  %}
+
+{% block content %}
+    <div class="features">
+        <h1>Создание новой заявки</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.title }}<br>
+            {{ form.phone_number }}<br>
+            {{ form.full_text }}<br><br>
+            {{ form.date }}<br> 
+            {{ form.street }}<br>
+            {{ form.house }}<br>
+            {{ form.flat }}<br><br>
+            {{ form.materials }}<br>
+            {{ form.executor }}<br>
+            {{ form.comment }}<br>
+            <span>{{ error }}</span>
+            <button class="btn btn-info"><i class="fas fa-plus-circle">Сохранить заявку</button>
+        </form>
+        
+    </div>
+    
+{% endblock  %}
+
+
+
+{% block footer %}
+{% comment %} <footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Аварийно-диспечерская служба 2024</p>
+    </div>
+</footer>  {% endcomment %}
+{% endblock  %}

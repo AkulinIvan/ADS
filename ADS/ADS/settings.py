@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     
     'main',
     'users',
-    'list_of_requests',
+    'list_of_request',
+    
+    'phonenumber_field',
     
     
 ]
@@ -81,8 +83,12 @@ WSGI_APPLICATION = 'ADS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ADS',
+        'USER': 'ads',
+        'PASSWORD': '[htyghjccsim',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -143,3 +149,6 @@ INTERNAL_IPS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/user/login/'
+
+PHONENUMBER_DB_FORMAT = 'NATIONAL'
+PHONENUMBER_DEFAULT_REGION = 'RU'

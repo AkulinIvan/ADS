@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{%load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+	<link rel="stylesheet" href="{% static "deps/css/table.css" %}">
+{% endblock  %}
+
+{% block content %}
+{% csrf_token %}
+<h5 class="m-2"><strong>{{ title }}</strong></h5>
+	<ul>
+		<table class="table table-bordered" data-resizable-columns-id="demo-table">
+			<tr>
+				<th data-resizable-column-id="Дата">Дата создания</th>
+				<th data-resizable-column-id="ФИО">ФИО</th>
+                <th data-resizable-column-id="Телефон">Телефон</th>
+				<th data-resizable-column-id="Улица">Улица</th>
+				<th data-resizable-column-id="Дом">Дом</th>
+				<th data-resizable-column-id="Квартира">Квартира</th>
+				<th data-resizable-column-id="Текст заявки">Текст заявки</th>
+				<th data-resizable-column-id="Исполнитель">Исполнитель</th>
+                <th data-resizable-column-id="Приоритет">Материал</th>
+                <th data-resizable-column-id="Комментарий">Комментарий</th>
+			</tr>
+			<tr>	
+				{% for c in content %}
+                
+					<div class="mt-6 flex justify-content-between">
+                        
+						<td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.date }}</a></p></td>
+						<td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.title }}</a></p></td>
+						<td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.phone_number }}</a></p></td>
+						<td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.street }}</a></p></td>
+						<td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.house }}</a></p></td>
+                        <td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.flat }}</a></p></td>
+                        <td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{c.full_text|truncatechars:35}}</a></p></td>
+                        <td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.executor }}</a></p></td>
+						<td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.materials }}</a></p></td>
+                        <td><p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"><a href={{c.get_absolute_url}}>{{ c.comment }}</a></p></td>
+						
+					</div>
+			</tr>
+				{% endfor %}
+		</table>
+
+    </ul>
+
+
+
+<!-- Пагинация -->
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center my-4">
+        <div class="custom-shadow d-flex">
+            <li class="page-item {% if not content.has_previous %}disabled{% endif %}">
+                <a class="page-link" href="{% if content.has_previous %}
+                {% url "list_of_request:applications" content.previous_page_number %}
+                {% else %}
+                #
+                {% endif %}">Назад</a>
+            </li>
+            {% for page in content.paginator.page_range %}
+            {% if page >= content.number|add:-2 and page <= content.number|add:2 %}
+            <li class="page-item {% if content.number == page %}active{% endif %}">
+                <a class="page-link" href="{% url "list_of_request:applications" page %}">{{ page }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            
+
+            <li class="page-item {% if not content.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{% if content.has_next %}
+                {% url "list_of_request:applications" content.next_page_number %}
+                {% else %}
+                #
+                {% endif %}">Дальше</a>
+            </li>
+        </div>
+    </ul>
+</nav>
+{% endblock  %}
+
+
+
+{% comment %} {% block footer %}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Аварийно-диспечерская служба 2024</p>
+    </div>
+</footer>
+{% endblock  %} {% endcomment %}
