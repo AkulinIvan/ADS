@@ -5,10 +5,11 @@ from .forms import ArticlesForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-def list_of_applications(request, page=1):
+def list_of_applications(request):
+    page = request.GET.get('page', 1)
     content = Articles.objects.all()
     paginator = Paginator(content, 3)
-    current_page = paginator.page(page)
+    current_page = paginator.page(int(page))
     context = {
         "title": "Список заявок",
         "content": current_page,

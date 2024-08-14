@@ -57,7 +57,7 @@
         <div class="custom-shadow d-flex">
             <li class="page-item {% if not content.has_previous %}disabled{% endif %}">
                 <a class="page-link" href="{% if content.has_previous %}
-                {% url "list_of_request:applications" content.previous_page_number %}
+                ?page={{ content.previous_page_number }}
                 {% else %}
                 #
                 {% endif %}">Назад</a>
@@ -65,7 +65,7 @@
             {% for page in content.paginator.page_range %}
             {% if page >= content.number|add:-2 and page <= content.number|add:2 %}
             <li class="page-item {% if content.number == page %}active{% endif %}">
-                <a class="page-link" href="{% url "list_of_request:applications" page %}">{{ page }}</a>
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
             </li>
             {% endif %}
             {% endfor %}
@@ -73,7 +73,7 @@
 
             <li class="page-item {% if not content.has_next %}disabled{% endif %}">
                 <a class="page-link" href="{% if content.has_next %}
-                {% url "list_of_request:applications" content.next_page_number %}
+                ?page={{ content.next_page_number }}
                 {% else %}
                 #
                 {% endif %}">Дальше</a>
